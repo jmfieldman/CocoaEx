@@ -39,7 +39,7 @@ struct DictionaryTests {
     @Test("with function modifies dictionary in place without affecting original")
     func withFunctionDoesNotModifyOriginalTest() {
         // Test that the original dictionary is not modified
-        var initialDict = ["existing": "value"]
+        let initialDict = ["existing": "value"]
         let originalDict = initialDict
 
         let result = initialDict.with { dict in
@@ -53,6 +53,9 @@ struct DictionaryTests {
         #expect(result["existing"] == "value")
         #expect(result["newKey"] == "newValue")
         #expect(result.count == 2)
+
+        #expect(originalDict["existing"] == "value")
+        #expect(originalDict.count == 1)
     }
 
     @Test("with function works with empty dictionary")
