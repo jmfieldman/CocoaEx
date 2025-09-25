@@ -50,9 +50,9 @@ public extension UIViewController {
     /// allow calling dismiss on the presentingViewController, where
     /// action is only taken if it is actively presenting another
     /// controller.
-    func dismissToSelf(animated: Bool) {
+    func dismissToSelf(animated: Bool, completion: (() -> Void)? = nil) {
         if let presentedViewController {
-            presentedViewController.dismiss(animated: animated)
+            presentedViewController.dismiss(animated: animated, completion: completion)
         }
     }
 }
