@@ -53,6 +53,8 @@ public extension UIViewController {
     func dismissToSelf(animated: Bool, completion: (() -> Void)? = nil) {
         if let presentedViewController {
             presentedViewController.dismiss(animated: animated, completion: completion)
+        } else {
+            completion?()
         }
     }
 }
