@@ -33,4 +33,11 @@ public extension String {
             iso8601_Converter_Time.date(from: self)
         }
     }
+
+    func decodeJsonAs<T: Decodable>(_ type: T.Type) throws -> T? {
+        guard let data = data(using: .utf8) else {
+            return nil
+        }
+        return try JSONDecoder().decode(T.self, from: data)
+    }
 }
