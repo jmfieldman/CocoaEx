@@ -40,4 +40,22 @@ public extension String {
         }
         return try JSONDecoder().decode(T.self, from: data)
     }
+
+    /// If the receiving string is a stringified JSON object, it will
+    /// be returned in pretty-printed format. Otherwise returns self.
+    func tryPretty() -> String {
+        guard let data = data(using: .utf8) else {
+            return self
+        }
+
+        guard let dict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+            return self
+        }
+
+        guard let prettyData = try? JSONSerialization.data(withJSONObject: dict, options: [.sortedKeys, .prettyPrinted]) else {
+            return self
+        }
+
+        return String(data: prettyData, encoding: .utf8) ?? self
+    }
 }
