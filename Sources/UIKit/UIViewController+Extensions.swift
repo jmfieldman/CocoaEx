@@ -57,4 +57,32 @@ public extension UIViewController {
             completion?()
         }
     }
+
+    /// Performs standard functions required to add a child view controller
+    func addStandardChild(_ child: UIViewController, includeConstraints: Bool = false) {
+        child.willMove(toParent: self)
+        addChild(child)
+        view.addSubview(child.view)
+
+        if includeConstraints {
+            child.view.translatesAutoresizingMaskIntoConstraints = false
+
+            NSLayoutConstraint.activate([
+                child.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+                child.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+                child.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+                child.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            ])
+        }
+
+        child.didMove(toParent: self)
+    }
+
+    /// Performs standard functions required to remove a child view controller
+    func removeStandardChild(_ child: UIViewController) {
+        child.willMove(toParent: nil)
+        child.view.removeFromSuperview()
+        child.removeFromParent()
+        child.didMove(toParent: nil)
+    }
 }
