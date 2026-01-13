@@ -30,4 +30,23 @@ public extension Sequence {
             }
         }
     }
+
+    /// Creates a dictionary by transforming each element of the sequence into a key-value pair,
+    /// and then inserting the value into an array represented by the key.
+    func mapToGroupedDictionary<Key: Hashable, Value>(_ transform: (Iterator.Element) throws -> (key: Key, value: Value)) rethrows -> [Key: [Value]] {
+        try reduce(into: [Key: [Value]]()) { partialResult, element in
+            let mapping = try transform(element)
+            partialResult[mapping.key, default: []].append(mapping.value)
+        }
+    }
+
+    /// Creates a dictionary by transforming each element of the sequence into a key-value pair,
+    /// filtering out nil values, and then inserting the value into an array represented by the key.
+    func compactMapToGroupedDictionary<Key: Hashable, Value>(_ transform: (Iterator.Element) throws -> (key: Key, value: Value)?) rethrows -> [Key: [Value]] {
+        try reduce(into: [Key: [Value]]()) { partialResult, element in
+            if let mapping = try transform(element) {
+                partialResult[mapping.key, default: []].append(mapping.value)
+            }
+        }
+    }
 }
