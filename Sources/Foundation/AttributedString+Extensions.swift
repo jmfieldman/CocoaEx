@@ -252,10 +252,9 @@ private struct MarkdownEncoder {
         guard let intent else { return .init(headerLevel: nil, listInfo: nil, indentLevels: 0) }
 
         var headerLevel: Int? = nil
-        var indentLevels = 0
+        let indentLevels = 0
 
         var listKind: ListInfo.Kind? = nil
-        var listContainerID: String? = nil
         var listDepth = 0
         var isListItem = false
 
