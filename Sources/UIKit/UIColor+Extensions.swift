@@ -3,6 +3,8 @@
 //  Copyright © 2025 Jason Fieldman.
 //
 
+#if os(iOS) || os(tvOS)
+
 import UIKit
 
 public extension UIColor {
@@ -38,3 +40,5 @@ public extension UIColor {
         )
     }
 }
+
+#endif

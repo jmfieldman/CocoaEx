@@ -1,7 +1,9 @@
 //
 //  UIImage+Extensions.swift
-//  Copyright © 2025 Jason Fieldman.
+//  Copyright © 2026 Jason Fieldman.
 //
+
+#if os(iOS) || os(tvOS)
 
 import UIKit
 
@@ -14,3 +16,5 @@ public extension UIImage {
         return resizedImage
     }
 }
+
+#endif

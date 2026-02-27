@@ -3,6 +3,8 @@
 //  Copyright © 2025 Jason Fieldman.
 //
 
+#if os(iOS)
+
 import UIKit
 
 public extension UIApplication {
@@ -11,3 +13,5 @@ public extension UIApplication {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
+
+#endif
